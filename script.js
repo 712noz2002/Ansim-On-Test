@@ -125,8 +125,8 @@
         '모든 순간을 직접 확인하려 하기보다, 평소 중요하게 생각했던\n식사·복약 등의 돌봄이 꾸준히 이어지고 있는지 살펴보세요.\n돌봄의 흐름을 확인하면 직접 챙기지 못하는 시간에도 안심할\n수 있습니다.'
       ],
       need: '돌봄의 연속성',
-      needSub: '보이지 않는 시간에도 평소의 돌봄이 계속되고 있다는 것.',
-      layout: { header: 740, typeTop: 285, nameGlyph: 385, char: [577, 246, 407, 426], firstGap: 96 }
+      needSub: '보이지 않는 시간에도 평소의 돌봄이\n계속되고 있다는 것.',
+      layout: { header: 740, typeTop: 285, nameGlyph: 385, char: [577, 246, 407, 426], firstGap: 96, lastExtra: 0 }
     },
     judge: {
       no: '02', name: '채점온', img: 'assets/img/char-2.png',
@@ -136,8 +136,8 @@
         '모든 정보를 직접 검토하려 하기보다, 무엇을 확인했고 어떤\n기준으로 판단했으며 이후 어떤 대응이 이루어졌는지 핵심적인\n과정을 확인해보세요. 판단의 이유를 이해하면 불확실한 상황에\n서도 조금 더 안심할 수 있습니다.'
       ],
       need: '판단의 근거',
-      needSub: '결과뿐 아니라 그 결과에 이르는 과정이 이해된다는 것.',
-      layout: { header: 745, typeTop: 284, nameGlyph: 382, char: [594, 260, 360, 413], firstGap: 96 }
+      needSub: '결과뿐 아니라 그 결과에 이르는 과정이\n이해된다는 것.',
+      layout: { header: 745, typeTop: 284, nameGlyph: 382, char: [594, 260, 360, 413], firstGap: 96, lastExtra: 0 }
     },
     catch: {
       no: '03', name: '포착온', img: 'assets/img/char-3.png',
@@ -148,7 +148,7 @@
       ],
       need: '변화의 맥락',
       needSub: '오늘의 한 장면이 아니라 이어져 온 변화의\n흐름을 이해하는 것.',
-      layout: { header: 746, typeTop: 286, nameGlyph: 384, char: [566, 305, 418, 360], firstGap: 53 }
+      layout: { header: 746, typeTop: 286, nameGlyph: 384, char: [566, 305, 418, 360], firstGap: 53, lastExtra: 58 }
     },
     together: {
       no: '04', name: '같이온', img: 'assets/img/char-4.png',
@@ -158,12 +158,13 @@
         '모든 정보를 혼자 전달하기보다 가족이 함께 확인할 수 있는\n기록을 기준으로 이야기를 나눠보세요. 각자가 같은 정보를\n확인할 수 있다면 소통에 대한 부담을 줄이고 돌봄의 책임도\n함께 나눌 수 있습니다.'
       ],
       need: '공동의 이해',
-      needSub: '내가 모든 정보를 전달하지 않아도 가족과 병원이 같은\n상황을 함께 이해하고 있다는 것.',
-      layout: { header: 744, typeTop: 289, nameGlyph: 387, char: [600, 241, 357, 433], firstGap: 55 }
+      needSub: '내가 모든 정보를 전달하지 않아도 가족과\n병원이 같은 상황을 함께 이해하고 있다는\n것.',
+      layout: { header: 744, typeTop: 289, nameGlyph: 387, char: [600, 241, 357, 433], firstGap: 55, lastExtra: 72.5 }
     }
   };
 
   var SECTION_TITLES = ['나의 돌봄 성향', '미래에 나는 이런 순간에 불안해질 수 있어요', '이럴 때는 이렇게 해보세요'];
+  var FOOTNOTE = '*일상에서 나타나는 확인 성향을 바탕으로 나와 가까운 돌봄 유형을 알아보는 체험입니다.';
 
   // 로딩 캐릭터: 같은 1600×374 캔버스를 같은 좌표로 4등분한 조각 (실루엣·완성본 외곽 일치)
   var LOAD_SLOTS = [
@@ -335,15 +336,10 @@
       '<p class="load-sub">잠시만 기다려 주세요</p></div>';
   }
 
-  // 결과 화면 하단 띠의 아래 방향 이중 화살표
-  var ICON_CHEVRON = '<svg class="ico-chev" viewBox="0 0 27 27" aria-hidden="true"><path d="M2.5 2.5L13.5 11.5L24.5 2.5M2.5 15L13.5 24L24.5 15" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
-  // 결과 화면의 '처음으로'는 글자 → X 순서 (2026-10-28 시안)
-  var HOME_RESULT = '<button type="button" class="home-btn home-btn--result" data-action="home"><span>처음으로</span>' + ICON_X + '</button>';
-
   function viewResult(type) {
     var r = RESULTS[type], L = r.layout;
     // 이름 글자 윗선(nameGlyph)에 맞추기 위한 라인박스 보정값 22.8
-    var head = '<header class="r-header" style="height:' + L.header + 'px">' + LOGO + HOME_RESULT +
+    var head = '<header class="r-header" style="height:' + L.header + 'px">' + LOGO + HOME +
       '<div class="r-type" style="top:' + L.typeTop + 'px">TYPE ' + r.no + '</div>' +
       '<h1 class="r-name" style="top:' + (L.nameGlyph - 22.8) + 'px">' + r.name + '</h1>' +
       '<img class="r-char" src="' + r.img + '" alt="" style="left:' + L.char[0] + 'px;top:' + L.char[1] + 'px;width:' + L.char[2] + 'px;height:' + L.char[3] + 'px">' +
@@ -351,19 +347,18 @@
 
     var secs = '';
     for (var i = 0; i < 3; i++) {
-      secs += '<section class="r-sec"><h3><span class="no">0' + (i + 1) + '</span>' + SECTION_TITLES[i] + '</h3>' +
+      var extra = (i === 2 && L.lastExtra) ? ' style="padding-bottom:' + (55.3 + L.lastExtra) + 'px"' : '';
+      secs += '<section class="r-sec"' + extra + '><h3><span class="no">0' + (i + 1) + '</span>' + SECTION_TITLES[i] + '</h3>' +
         '<p>' + lines(r.sections[i]) + '</p></section>';
     }
-    // 04도 같은 섹션 형식: 확신 키워드(굵게) + 설명
-    secs += '<section class="r-sec r-sec--need"><h3><span class="no">04</span>나에게 필요한 확신</h3>' +
-      '<p class="need">' + r.need + '</p><p class="need-sub">' + lines(r.needSub) + '</p></section>';
 
     return '<div class="result-scroller"><div class="result-sizer"><div class="result-page">' + head +
       '<div class="r-body" style="padding-top:' + L.firstGap + 'px">' + secs + '</div>' +
-      '<div class="r-cta">' + ICON_CHEVRON + '<span>나와 닮은 돌봄 유형 카드를 가져가세요!</span>' + ICON_CHEVRON + '</div>' +
+      '<div class="r-navy"><div class="lbl"><span class="no">04</span>나에게 필요한 확신</div>' +
+      '<div class="big">' + r.need + '</div><div class="sub">' + lines(r.needSub) + '</div></div>' +
+      '<div class="r-foot">' + FOOTNOTE + '</div>' +
       '</div></div></div>';
   }
-
 
   /* =======================================================
      5) FLOW — 화면 전환과 동작
@@ -407,10 +402,43 @@
     show('question', viewQuestion(idx));
   }
 
+  // =====================================================================================
+  // =====================================================================================
+  // =====================================================================================
+  // 코드 추가된 부분
+  // Firebase RTDB REST API: 결과가 확정될 때 LED 제어 이벤트를 한 번 기록하는 코드
+  var FIREBASE_DATABASE_URL = 'https://goeun-degree-default-rtdb.asia-southeast1.firebasedatabase.app';
+  function sendLedResult(type) {
+    if (['resp', 'judge', 'catch', 'together'].indexOf(type) === -1) return;
+    var payload = {
+      type: type,
+      createdAt: Date.now(),
+      source: 'ansim-on-web',
+      eventId: String(Date.now()) + '-' + Math.random().toString(36).slice(2, 10)
+    };
+    fetch(FIREBASE_DATABASE_URL + '/ledCommands.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Firebase HTTP ' + response.status);
+      return response.json();
+    }).then(function (data) {
+      if (window.console && console.log) console.log('[안심ON] LED 결과 전송 완료:', type, data && data.name);
+    }).catch(function (err) {
+      if (window.console && console.error) console.error('[안심ON] LED 결과 전송 실패:', err);
+    });
+  }
+  // 추가된 코드 끝
+  // =====================================================================================
+  // =====================================================================================
+  // =====================================================================================
+
   function goLoading() {
     if (state.loadingStarted) return;     // 로딩은 한 번만
     state.loadingStarted = true;
     state.finalType = resolveType(state.answers, state.q7);
+    sendLedResult(state.finalType);
     state.screen = 'loading';
     var el = show('loading', viewLoading());
     var slots = el.querySelectorAll('.load-slot');
